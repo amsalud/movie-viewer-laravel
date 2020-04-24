@@ -7,7 +7,7 @@
             <div class="grid grid-cols-4 gap-8">
                 <div class="mt-8">
                     <a href="#">
-                        <img src="/img/parasite.jpg" alt="parasite" class="">
+                        <img src="/img/parasite.jpg" alt="parasite" class="hover:opacity-75">
                     </a>
                     <div class="mt-2">
                         <a href="text-lg mt-2 hover:text-gray:300">Parasite</a>
