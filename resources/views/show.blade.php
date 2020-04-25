@@ -77,12 +77,15 @@
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-semibold">Images</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            @foreach($movie['images']['backdrops'] as $backdrop)
+            @if($loop->index < 6)
             <div class="mt-8">
                 <a href="#">
-                    <img src="/img/image1.jpg" alt="parasite" class="hover:opacity-75 transition ease-in-out duration-150">
+                    <img src="{{'https://image.tmdb.org/t/p/w300' . $backdrop['file_path']}}" alt="image" class="hover:opacity-75 transition ease-in-out duration-150">
                 </a>
             </div>
-       
+            @endif
+            @endforeach
         </div>
     </div>
 </div>
