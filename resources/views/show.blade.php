@@ -57,15 +57,18 @@
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-seminold">Cast</h2>
         <div class="grid grid-cols-1 sm:grid-cols2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            @foreach($movie['credits']['cast'] as $cast)
             <div class="mt-8">
                 <a href="#">
-                    <img src="/img/actor1.jpg" alt="parasite" class="hover:opacity-75 transition-ease-in-out duration-150">
+                    <img src="{{ (isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png' )  }}" alt="{{$cast['name']}}" class="hover:opacity-75 transition-ease-in-out duration-150">
+
                 </a>
                 <div class="mt-2">
-                    <a href="#" class="text-lg mt-2 hover:text-gray:300">Real Name</a>
-                    <div class="text-sm text-gray-400">John Smith</div>
+                    <a href="#" class="text-lg mt-2 hover:text-gray:300">{{$cast['name']}}</a>
+                    <div class="text-sm text-gray-400">{{$cast['character']}}</div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>
