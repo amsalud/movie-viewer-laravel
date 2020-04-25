@@ -41,4 +41,20 @@
             </div>
         </div>
     </div>
+    <div class="movie-cast border-b border-gray-800">
+        <div class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-seminold">Cast</h2>
+            <div class="grid grid-cols-1 sm:grid-cols2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <div class="mt-8">
+                    <a href="#">
+                        <img src="/img/actor1.jpg" alt="parasite" class="hover:opacity-75 transition-ease-in-out duration-150">
+                    </a>
+                    <div class="mt-2">
+                        <a href="#" class="text-lg mt-2 hover:text-gray:300">Real Name</a>
+                        <div class="text-sm text-gray-400">John Smith</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
