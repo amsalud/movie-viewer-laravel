@@ -60,7 +60,7 @@
             @foreach($movie['credits']['cast'] as $cast)
             @if($loop->index < 5) 
             <div class="mt-8">
-                <a href="#">
+                <a href="{{ (isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png' )  }}" target="_blank">
                     <img src="{{ (isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png' )  }}" alt="{{$cast['name']}}" class="hover:opacity-75 transition-ease-in-out duration-150">
                 </a>
                 <div class="mt-2">
@@ -80,7 +80,7 @@
             @foreach($movie['images']['backdrops'] as $backdrop)
             @if($loop->index < 6)
             <div class="mt-8">
-                <a href="#">
+                <a href="{{'https://image.tmdb.org/t/p/w300' . $backdrop['file_path']}}" target="_blank">
                     <img src="{{'https://image.tmdb.org/t/p/w300' . $backdrop['file_path']}}" alt="image" class="hover:opacity-75 transition ease-in-out duration-150">
                 </a>
             </div>
