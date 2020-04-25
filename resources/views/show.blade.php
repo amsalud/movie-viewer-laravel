@@ -28,28 +28,28 @@
             </p>
 
             <div class="mt-12">
-                <h4 class="text-white font-semibold">Featured Cast</h4>
+                <h4 class="text-white font-semibold">Featured Crew</h4>
                 <div class="flex mt-4">
-                    <div>
-                        <div>Bong Joon-ho</div>
-                        <div class="text-sm text-gray-400">Screenplay, Director, Story</div>
+                    @foreach($movie['credits']['crew'] as $crew)
+                    @if($loop->index < 2) 
+                    <div class="mr-8">
+                        <div>{{ $crew['name'] }}</div>
+                        <div class="text-sm text-gray-400">{{$crew['job']}}</div>
                     </div>
-                    <div class="ml-8">
-                        <div>Han Jin-won</div>
-                        <div class="text-sm text-gray-400">Screenplay</div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12">
-                <button class="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
-                    <svg class="w-6 fill-current" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none" />
-                        <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" /></svg>
-                    <span class="ml-2">Play Trailer</span>
-                </button>
+                    @endif
+                @endforeach
             </div>
         </div>
+        <div class="mt-12">
+            <button class="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
+                <svg class="w-6 fill-current" viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" /></svg>
+                <span class="ml-2">Play Trailer</span>
+            </button>
+        </div>
     </div>
+</div>
 </div>
 <div class="movie-cast border-b border-gray-800">
     <div class="container mx-auto px-4 py-16">
