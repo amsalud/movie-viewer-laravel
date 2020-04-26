@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class ViewMoviesTest extends TestCase
@@ -42,6 +43,16 @@ class ViewMoviesTest extends TestCase
         $response->assertSee('Fake Casting Director');
         $response->assertSee('Jane Doe');
     }
+
+    /** @test */
+    public function the_search_dropdown_works_correctly(){
+        Http::fake([
+            'https://api.themoviedb.org/3/search/movie?query=avengers' => $this->fakeSearchMovies()
+        ]);
+
+        Livewire::test('search-dropdown')->assertDontSee('The Avengers')->set('search', 'avengers')->assertSee('The Avengers');
+    }
+
 
     private function fakePopularMovies(){
         return Http::response([
@@ -156,5 +167,28 @@ class ViewMoviesTest extends TestCase
                   "videos" => null,
                   "images" => null
                 ], 200);
+    }
+
+    private function fakeSearchMovies(){
+        return Http::response([
+            'results' => [
+                [
+                    "popularity" => 0,
+                    "vote_count" => 0,
+                    "video" => false,
+                    "poster_path" => "/fake.jpg",
+                    "id" => 1,
+                    "adult" => false,
+                    "backdrop_path" => "/fake.jpg",
+                    "original_language" => "en",
+                    "original_title" => "Fake",
+                    "genre_ids" => [1,2],
+                    "title" => "The Avengers",
+                    "vote_average" => 1,
+                    "overview" => "Lorem Ipsum...",
+                    "release_date" => "2019-09-17"
+                  ]
+                ]
+         ], 200);
     }
 }
