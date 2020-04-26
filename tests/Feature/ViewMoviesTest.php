@@ -30,6 +30,19 @@ class ViewMoviesTest extends TestCase
         $response->assertSee('Fake, Fake2');
     }
 
+    /** @test */
+    public function the_movie_page_show_the_correct_info(){
+        Http::fake([
+            'https://api.themoviedb.org/3/movie/' => $this->fakeMovie()
+        ]);
+
+        $response = $this->get(route('movies.show', 1234));
+        $response->assertSee('Fake Movie');
+        $response->assertSee('John Smith');
+        $response->assertSee('Fake Casting Director');
+        $response->assertSee('Jane Doe');
+    }
+
     private function fakePopularMovies(){
         return Http::response([
             'results' => [
@@ -89,5 +102,59 @@ class ViewMoviesTest extends TestCase
                 ]
             ]
         ], 200);
+    }
+
+    private function fakeMovie(){
+        return Http::response(
+            [
+                "adult" => false,
+                  "backdrop_path" => "/fake.jpg",
+                  "belongs_to_collection" => null,
+                  "budget" => 0,
+                  "genres" => null,
+                  "homepage" => "https://fake.com",
+                  "id" => 1234,
+                  "imdb_id" => "tt1234",
+                  "original_language" => "en",
+                  "original_title" => "Fake Movie",
+                  "overview" => "Lorem Ipsum...",
+                  "popularity" => 224.468,
+                  "poster_path" => "/fake.jpg",
+                  "production_companies" => null,
+                  "production_countries" => [],
+                  "release_date" => "2020-02-12",
+                  "revenue" => 0,
+                  "runtime" => 99,
+                  "spoken_languages" => [],
+                  "status" => "Released",
+                  "tagline" => "fake",
+                  "title" => "Fake Movie",
+                  "video" => false,
+                  "vote_average" => 0,
+                  "vote_count" => 0,
+                  "credits" => [
+                      "crew" =>[
+                        "credit_id" => "3232",
+                        "department" => "None",
+                        "gender" => 0,
+                        "id" => 1,
+                        "job" => "Fake Casting Director",
+                        "name" => "John Smith",
+                        "profile_path" => null
+                      ],
+                      "cast" => [
+                        "cast_id" => 123,
+                        "character" => "none",
+                        "credit_id" => "1234",
+                        "gender" => 2,
+                        "id" => 1234,
+                        "name" => "Jane Doe",
+                        "order" => 0,
+                        "profile_path" => "/fake.jpg"
+                      ]
+                      ],
+                  "videos" => null,
+                  "images" => null
+                ], 200);
     }
 }
