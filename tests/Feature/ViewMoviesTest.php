@@ -15,7 +15,7 @@ class ViewMoviesTest extends TestCase
         Http::fake([
             'https://api.themoviedb.org/3/movie/popular' => $this->fakePopularMovies(),
             'https://api.themoviedb.org/3/movie/now_playing' => $this->fakeNowPlayingMovies(),
-            // 'https://api.themoviedb.org/3/genre/movie/list' => $this->fakeGenres()
+            'https://api.themoviedb.org/3/genre/movie/list' => $this->fakeGenres()
         ]);
 
         $response = $this->get(route('movies.index'));
@@ -26,6 +26,8 @@ class ViewMoviesTest extends TestCase
 
         $response->assertSee('Now Playing');
         $response->assertSee('Fake Now Playing Movie');
+
+        $response->assertSee('Fake, Fake2');
     }
 
     private function fakePopularMovies(){
@@ -76,14 +78,16 @@ class ViewMoviesTest extends TestCase
 
     private function fakeGenres(){
         return Http::response([
-            [
-                "id" => 1,
-                "name" => 'Fake'
-            ],
-            [
-                "id" => 2,
-                "name" => 'Fake2'
-            ],
+            'genres' => [
+                [
+                    "id" => 1,
+                    "name" => 'Fake'
+                ],
+                [
+                    "id" => 2,
+                    "name" => 'Fake2'
+                ]
+            ]
         ], 200);
     }
 }
