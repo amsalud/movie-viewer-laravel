@@ -14,10 +14,6 @@
             <span class="mx-2">|</span>
             <span>{{ \Carbon\Carbon::parse($movie['release_date'])->format('M d, Y') }}</span>
         </div>
-        <div class="text-gray-400 text-sm">
-            @foreach($movie['genre_ids'] as $genre_id)
-            {{ $genres->get($genre_id)}}@if(!$loop->last), @endif
-            @endforeach
-        </div>
+        <div class="text-gray-400 text-sm">@foreach($movie['genre_ids'] as $genre_id){{$genres->get($genre_id)}}@if(!$loop->last),@endif @endforeach</div>
     </div>
 </div>
