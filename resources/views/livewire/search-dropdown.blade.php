@@ -9,7 +9,7 @@
         <ul>
             @foreach($searchResults as $searchResult)
             <li class="border-b text-sm border-gray-700">
-                <a href="#" class="block hover:bg-gray-700 px-3 py-3">{{$searchResult['title']}}</a>
+                <a href="{{route('movies.show', $searchResult['id'])}}" class="block hover:bg-gray-700 px-3 py-3">{{$searchResult['title']}}</a>
             </li>
             @endforeach
         </ul>    
