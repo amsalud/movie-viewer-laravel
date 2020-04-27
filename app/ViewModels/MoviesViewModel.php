@@ -6,9 +6,9 @@ use Spatie\ViewModels\ViewModel;
 
 class MoviesViewModel extends ViewModel
 {
-    private $popularMovies;
-    private $nowPlayingMovies;
-    private $genres;
+    public $popularMovies;
+    public $nowPlayingMovies;
+    public $genres;
 
     public function __construct($popularMovies, $nowPlayingMovies, $genres)
     {
@@ -17,15 +17,19 @@ class MoviesViewModel extends ViewModel
         $this->genres = $genres;
     }
 
-    public function getPopularMovies(){
-        return $this->popularMovies;
+    public function popularMovies(){
+        return collect($this->popularMovies)->map(function($movie){
+            return collect($movie)->merge([
+                'poster_path' => 'https://image.tmdb.org/t/p/w500' . $movie['poster_path']    
+            ]);
+        })->dump();
     }
 
-    public function getNowPlayingMovies(){
+    public function nowPlayingMovies(){
         return $this->nowPlayingMovies;
     }
 
-    public function getGenres(){
+    public function genres(){
         return $this->genres;
     }
 }
