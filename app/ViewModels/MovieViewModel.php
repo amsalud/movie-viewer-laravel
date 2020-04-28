@@ -31,7 +31,7 @@ class MovieViewModel extends ViewModel
     private function formatCrews(){
         return collect($this->movie['credits']['crew'])->map(function($crew){
             return collect($crew)->only(['name', 'job']);
-        })->slice(0, 2);
+        })->take(2);
     }
 
     private function formatCasts(){
@@ -39,13 +39,13 @@ class MovieViewModel extends ViewModel
             return collect($cast)->merge([
                 'image' => isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png'
             ])->only(['name', 'character', 'image']);
-        })->slice(0, 5);
+        })->take(5);
     }
 
     private function formatImages(){
         return collect($this->movie['images']['backdrops'])->map(function($image){
             return 'https://image.tmdb.org/t/p/w300' . $image['file_path'];
-        })->slice(0, 6); 
+        })->take(2); 
     }
 
 }
