@@ -21,7 +21,8 @@ class MovieViewModel extends ViewModel
             'vote_average' => $this->movie['vote_average'] * 10 . '%',  
             'release_date' => Carbon::parse($this->movie['release_date'])->format('M d, Y'),
             'genres' => $this->formatGenres(),
-            'crews' => $this->formatCrews()
+            'crews' => $this->formatCrews(),
+            'casts' => $this->formatCasts()
         ])->dump();
     }
 
@@ -35,6 +36,14 @@ class MovieViewModel extends ViewModel
         return collect($this->movie['credits']['crew'])->map(function($crew){
             return collect($crew)->only(['name', 'job']);
         })->slice(0, 2);
+    }
+
+    private function formatCasts(){
+        return collect($this->movie['credits']['cast'])->map(function($cast){
+            return collect($cast)->merge([
+                'image' => isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png'
+            ])->only(['name', 'character', 'image']);
+        })->slice(0, 5);
     }
 
 }

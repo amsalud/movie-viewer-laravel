@@ -68,21 +68,18 @@
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-seminold">Cast</h2>
         <div class="grid grid-cols-1 sm:grid-cols2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            @foreach($movie['credits']['cast'] as $cast)
-            @if($loop->index < 5) <div class="mt-8">
+            @foreach($movie['casts'] as $cast)
+            <div class="mt-8">
                 <a @click.prevent="isOpen = true 
-                                image='{{ (isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png' )  }}'" href="#">
-                    <img src="{{ (isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png' )  }}" alt="{{$cast['name']}}" class="hover:opacity-75 transition-ease-in-out duration-150">
+                                image='{{ $cast['image'] }}'" href="#">
+                    <img src="{{ $cast['image'] }}" alt="{{$cast['name']}}" class="hover:opacity-75 transition-ease-in-out duration-150">
                 </a>
                 <div class="mt-2">
                     <a href="#" class="text-lg mt-2 hover:text-gray:300">{{$cast['name']}}</a>
                     <div class="text-sm text-gray-400">{{$cast['character']}}</div>
                 </div>
-        </div>
-        @else
-        @break
-        @endif
-        @endforeach
+            </div>
+            @endforeach
     </div>
     <div style="background-color: rgba(0, 0, 0, .5);" class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto" x-show="isOpen">
         <div class="w-350 mx-auto lg:px-32 rounded-lg overflow-y-auto ">
