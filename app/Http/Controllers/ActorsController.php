@@ -13,7 +13,7 @@ class ActorsController extends Controller
      */
     public function index()
     {
-        //
+        return view('actors.index');
     }
 
     /**
