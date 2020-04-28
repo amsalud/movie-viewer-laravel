@@ -21,17 +21,11 @@ class MovieViewModel extends ViewModel
             'vote_average' => $this->movie['vote_average'] * 10 . '%',  
             'release_date' => Carbon::parse($this->movie['release_date'])->format('M d, Y'),
             'trailer' => count($this->movie['videos']['results']) > 0 ? 'https://www.youtube.com/embed/' . ($this->movie['videos']['results'][0]['id']) : null,
-            'genres' => $this->formatGenres(),
+            'genres' => collect($this->movie['genres'])->pluck('name')->flatten()->implode(', '),
             'crews' => $this->formatCrews(),
             'casts' => $this->formatCasts(),
             'images' => $this->formatImages()
         ])->only('title', 'poster_path', 'vote_average', 'release_date', 'trailer', 'genres', 'crews', 'casts', 'images', 'overview');
-    }
-
-    private function formatGenres(){
-        return collect($this->movie['genres'])->map(function($genre){
-            return $genre['name'];
-        })->implode(', ');
     }
 
     private function formatCrews(){
