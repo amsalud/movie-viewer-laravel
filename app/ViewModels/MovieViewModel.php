@@ -45,7 +45,7 @@ class MovieViewModel extends ViewModel
     private function formatImages(){
         return collect($this->movie['images']['backdrops'])->map(function($image){
             return 'https://image.tmdb.org/t/p/w300' . $image['file_path'];
-        })->take(2); 
+        })->take(9); 
     }
 
 }
