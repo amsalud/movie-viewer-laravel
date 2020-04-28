@@ -37,6 +37,8 @@ class MoviesViewModel extends ViewModel
     }
 
     public function genres(){
-        return $this->genres;
+        return collect($this->genres)->mapWithKeys(function($genre){
+            return [ $genre['id'] => $genre['name']];
+        });
     }
 }
