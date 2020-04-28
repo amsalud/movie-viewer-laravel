@@ -25,7 +25,7 @@ class MovieViewModel extends ViewModel
             'crews' => $this->formatCrews(),
             'casts' => $this->formatCasts(),
             'images' => $this->formatImages()
-        ])->dump();
+        ])->only('title', 'poster_path', 'vote_average', 'release_date', 'trailer', 'genres', 'crews', 'casts', 'images', 'overview')->dump();
     }
 
     private function formatGenres(){
