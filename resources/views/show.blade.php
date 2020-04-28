@@ -17,9 +17,7 @@
                 <span>{{ $movie['release_date'] }}</span>
                 <span class="mx-2">|</span>
                 <span>
-                    @foreach($movie['genres'] as $genre)
-                    {{ $genre['name']}}@if(!$loop->last), @endif
-                    @endforeach
+                  {{$movie['genres']}}
                 </span>
             </div>
 

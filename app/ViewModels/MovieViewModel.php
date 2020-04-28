@@ -20,6 +20,14 @@ class MovieViewModel extends ViewModel
             'poster_path' => 'https://image.tmdb.org/t/p/w500' . $this->movie['poster_path'],
             'vote_average' => $this->movie['vote_average'] * 10 . '%',  
             'release_date' => Carbon::parse($this->movie['release_date'])->format('M d, Y'),
+            'genres' => $this->formatGenres()
         ])->dump();
     }
+
+    private function formatGenres(){
+        return collect($this->movie['genres'])->map(function($genre){
+            return $genre['name'];
+        })->implode(', ');
+    }
+
 }
