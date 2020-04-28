@@ -22,7 +22,8 @@ class MovieViewModel extends ViewModel
             'release_date' => Carbon::parse($this->movie['release_date'])->format('M d, Y'),
             'genres' => $this->formatGenres(),
             'crews' => $this->formatCrews(),
-            'casts' => $this->formatCasts()
+            'casts' => $this->formatCasts(),
+            'images' => $this->formatImages()
         ])->dump();
     }
 
@@ -44,6 +45,12 @@ class MovieViewModel extends ViewModel
                 'image' => isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png'
             ])->only(['name', 'character', 'image']);
         })->slice(0, 5);
+    }
+
+    private function formatImages(){
+        return collect($this->movie['images']['backdrops'])->map(function($image){
+            return 'https://image.tmdb.org/t/p/w300' . $image['file_path'];
+        })->slice(0, 6); 
     }
 
 }
