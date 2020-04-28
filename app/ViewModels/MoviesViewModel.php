@@ -19,18 +19,21 @@ class MoviesViewModel extends ViewModel
     }
 
     public function popularMovies(){
-        return collect($this->popularMovies)->map(function($movie){
+        return $this->formatMovieData($this->popularMovies);
+    }
+
+    public function nowPlayingMovies(){
+        return $this->formatMovieData($this->nowPlayingMovies);
+    }
+
+    private function formatMovieData($movies){
+        return collect($movies)->map(function($movie){
             return collect($movie)->merge([
                 'poster_path' => 'https://image.tmdb.org/t/p/w500' . $movie['poster_path'],
                 'vote_average' => $movie['vote_average'] * 10 . '%',  
                 'release_date' => Carbon::parse($movie['release_date'])->format('M d, Y')  
-                
             ]);
-        })->dump();
-    }
-
-    public function nowPlayingMovies(){
-        return $this->nowPlayingMovies;
+        });
     }
 
     public function genres(){
