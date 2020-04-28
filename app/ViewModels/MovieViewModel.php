@@ -20,6 +20,7 @@ class MovieViewModel extends ViewModel
             'poster_path' => 'https://image.tmdb.org/t/p/w500' . $this->movie['poster_path'],
             'vote_average' => $this->movie['vote_average'] * 10 . '%',  
             'release_date' => Carbon::parse($this->movie['release_date'])->format('M d, Y'),
+            'trailer' => count($this->movie['videos']['results']) > 0 ? 'https://www.youtube.com/embed/' . ($this->movie['videos']['results'][0]['id']) : null,
             'genres' => $this->formatGenres(),
             'crews' => $this->formatCrews(),
             'casts' => $this->formatCasts(),

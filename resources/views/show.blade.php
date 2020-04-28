@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div x-data="{ isOpen: false}">
-                @if(count($movie['videos']['results']) > 0)
+                @if(isset($movie['trailer']))
                 <div class="mt-12">
                     <button @click="isOpen = true" class="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
                         <svg class="w-6 fill-current" viewBox="0 0 24 24">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="modal-body px-8 py-8">
                                 <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
-                                    <iframe class="responsive-iframe absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}" style="border:0;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    <iframe class="responsive-iframe absolute top-0 left-0 w-full h-full" src="{{ $movie['trailer']}}" style="border:0;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
