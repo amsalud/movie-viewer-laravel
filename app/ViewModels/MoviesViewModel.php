@@ -20,7 +20,8 @@ class MoviesViewModel extends ViewModel
     public function popularMovies(){
         return collect($this->popularMovies)->map(function($movie){
             return collect($movie)->merge([
-                'poster_path' => 'https://image.tmdb.org/t/p/w500' . $movie['poster_path']    
+                'poster_path' => 'https://image.tmdb.org/t/p/w500' . $movie['poster_path'],
+                'vote_average' => $movie['vote_average'] * 10 . '%',    
             ]);
         })->dump();
     }
