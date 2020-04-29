@@ -23,8 +23,8 @@
                 {{$tvShow['overview']}}
             </p>
 
+            @if(count($tvShow['crews']) > 0) 
             <div class="mt-12">
-                <h4 class="text-white font-semibold">Featured Crew</h4>
                 <div class="flex mt-4">
                     @foreach($tvShow['crews'] as $crew)
                     <div class="mr-8">
@@ -34,6 +34,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
             <div x-data="{ isOpen: false}">
                 @if(isset($tvShow['trailer']))
                 <div class="mt-12">
