@@ -38,19 +38,30 @@
                 <svg class="fill-current text-gray-400 hover:text-white w-4" viewBox="0 0 448 512">
                     <path d="M448 384c-28.02 0-31.26-32-74.5-32-43.43 0-46.825 32-74.75 32-27.695 0-31.454-32-74.75-32-42.842 0-47.218 32-74.5 32-28.148 0-31.202-32-74.75-32-43.547 0-46.653 32-74.75 32v-80c0-26.5 21.5-48 48-48h16V112h64v144h64V112h64v144h64V112h64v144h16c26.5 0 48 21.5 48 48v80zm0 128H0v-96c43.356 0 46.767-32 74.75-32 27.951 0 31.253 32 74.75 32 42.843 0 47.217-32 74.5-32 28.148 0 31.201 32 74.75 32 43.357 0 46.767-32 74.75-32 27.488 0 31.252 32 74.5 32v96zM96 96c-17.75 0-32-14.25-32-32 0-31 32-23 32-64 12 0 32 29.5 32 56s-14.25 40-32 40zm128 0c-17.75 0-32-14.25-32-32 0-31 32-23 32-64 12 0 32 29.5 32 56s-14.25 40-32 40zm128 0c-17.75 0-32-14.25-32-32 0-31 32-23 32-64 12 0 32 29.5 32 56s-14.25 40-32 40z" /></svg>
                 <span class="ml-2">February 20, 1983 (37 years old) in Toronto, Canada</span>
-                <span class="mx-2">|</span>
-                <span>Info</span>
             </div>
 
             <p class="text-gray-300 mt-8">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla fugiat neque aliquid minima. Aliquam odio corrupti incidunt dolore reprehenderit, in nemo ut velit error, sint modi. Illo aut autem natus!
             </p>
+
+            <h4 class="font-semibold mt-12">Known For</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                <div class="mt-4">
+                    <a href="#">
+                        <img src="https://image.tmdb.org/t/p/w150_and_h225_bestv2/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="" class="hover:opacity-75 transition ease-in-out duration-150">
+                    </a>
+                    <a href="" class="text-sm leading-normal block text-gray-400 hover:text-white mt-1">The Avengers</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="credits border-b border-gray-800" x-data="{ isOpen: false, image: ''}">
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-seminold">Credits</h2>
+        <ul class="list-disc leading-loose pl-5 mt-8">
+            <li>2020 &middot; <strong>Black Widow</strong> as Tony Stark / Iron Man</li>
+        </ul>
     </div>
 </div>
 @endsection
