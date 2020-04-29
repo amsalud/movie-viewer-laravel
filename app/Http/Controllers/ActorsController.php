@@ -52,6 +52,8 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
+        $actor = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/person/'.$id)->json();
+
         return view('actors.show');
     }
 
