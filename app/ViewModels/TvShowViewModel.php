@@ -24,8 +24,9 @@ class TvShowViewModel extends ViewModel
             'genres' => collect($this->tvShow['genres'])->pluck('name')->flatten()->implode(', '),
             'crews' => $this->formatCrews(),
             'casts' => $this->formatCasts(),
-            'images' => $this->formatImages()
-        ])->only('name', 'poster_path', 'vote_average', 'first_air_date', 'trailer', 'genres', 'crews', 'casts', 'images', 'overview');
+            'images' => $this->formatImages(),
+            'creators' => collect($this->tvShow['created_by'])->pluck('name')->take(2)
+        ])->only('name', 'poster_path', 'vote_average', 'first_air_date', 'trailer', 'genres', 'crews', 'casts', 'images', 'overview', 'creators');
     }
 
     private function formatCrews(){
