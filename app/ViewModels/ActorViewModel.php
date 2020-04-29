@@ -37,11 +37,12 @@ class ActorViewModel extends ViewModel
 
     private function formatKnownFor($credits)
     {
-        return collect($credits)->where('media_type', 'movie')->sortByDesc('popularity')->take(5)
+        return collect($credits)->sortByDesc('popularity')->take(5)
             ->map(function ($movie) {
+                $title = $this->extractTitle($movie);
                 return collect($movie)->merge([
                     'poster_path' => $movie['poster_path'] ? 'https://image.tmdb.org/t/p/w185' . $movie['poster_path'] : 'https://via.placeholder.com/185x278',
-                    'title' => $movie['title'] ? $movie['title'] : 'Untitled'
+                    'title' => $title
                 ])->only('title', 'poster_path', 'id');
             });
     }
@@ -49,8 +50,8 @@ class ActorViewModel extends ViewModel
     private function formatCredits($credits)
     {
         return collect($credits)->map(function ($credit) {
-                $title = $this->extractCreditTitle($credit);
-                $releaseDate = $this->extractCreditReleaseDate($credit);
+                $title = $this->extractTitle($credit);
+                $releaseDate = $this->extractReleaseDate($credit);
 
                 return collect($credit)->merge([
                     'title'=> $title,
@@ -61,8 +62,8 @@ class ActorViewModel extends ViewModel
             })->sortByDesc('release_date');
     }
 
-    private function extractCreditTitle($credit){
-        $title = '';
+    private function extractTitle($credit){
+        $title = 'Untitled';
         if(isset($credit['title'])){
             return $credit['title'];
         }
@@ -72,7 +73,7 @@ class ActorViewModel extends ViewModel
         return $title;
     }
 
-    private function extractCreditReleaseDate($credit){
+    private function extractReleaseDate($credit){
         $releaseDate = '';
         if(isset($credit['release_date'])){
             return $releaseDate = $credit['release_date'];
