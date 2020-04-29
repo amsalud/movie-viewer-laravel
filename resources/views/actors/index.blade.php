@@ -19,5 +19,9 @@
             @endforeach
         </div>
     </div>
+    <div class="flex justify-between mt-16">
+        <a href="#">Previous</a>
+        <a href="">Next</a>
+    </div>
 </div>
 @endsection
