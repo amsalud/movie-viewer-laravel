@@ -18,8 +18,17 @@ class ActorViewModel extends ViewModel
         return collect($this->actor)->merge([
             'profile_path' => isset($this->actor['profile_path']) ?  'https://image.tmdb.org/t/p/w300'. $this->actor['profile_path'] : 'https://via.placeholder.com/300x450',
             'birthday' =>  Carbon::parse($this->actor['birthday'])->format('M d, Y'),
-            'age' => Carbon::parse($this->actor['birthday'])->age
+            'age' => Carbon::parse($this->actor['birthday'])->age,
+            'social_media_links' => $this->formatSocialMediaLinks($this->actor['external_ids']) 
 
         ])->dump();
+    }
+
+    private function formatSocialMediaLinks($links){
+        return collect($links)->merge([
+            'facebook' => isset($links['facebook_id']) ? 'https://www.facebook.com/' . $links['facebook_id'] : null,
+            'instagram' => isset($links['instagram_id']) ? 'https://www.instagram.com/' . $links['instagram_id'] : null,
+            'twitter' => isset($links['twitter_id']) ? 'https://twitter.com/' . $links['twitter_id'] : null,
+        ])->only('facebook', 'instagram', 'twitter');
     }
 }
