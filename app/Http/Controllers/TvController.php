@@ -16,9 +16,8 @@ class TvController extends Controller
     public function index()
     {
         $popularTvShows = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/tv/popular')->json()['results'];
-        $genres = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/genre/movie/list')->json()['genres'];
+        $genres = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/genre/tv/list')->json()['genres'];
         $viewModel = new TvShowsViewModel($popularTvShows, $genres);
-        
         return view('tv.index', $viewModel);
     }
 
