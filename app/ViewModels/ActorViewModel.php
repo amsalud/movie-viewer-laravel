@@ -23,7 +23,7 @@ class ActorViewModel extends ViewModel
             'social_media_links' => $this->formatSocialMediaLinks($this->actor['external_ids']),
             'known_for' => $this->formatKnownFor($this->actor['combined_credits']['cast']),
             'credits' => $this->formatCredits($this->actor['combined_credits']['cast'])
-        ])->dump();
+        ])->only('profile_path', 'birthday', 'age', 'biography', 'social_media_links', 'known_for', 'credits', 'homepage', 'name', 'place_of_birth');
     }
 
     private function formatSocialMediaLinks($links)
