@@ -21,7 +21,8 @@ class ActorViewModel extends ViewModel
             'birthday' =>  Carbon::parse($this->actor['birthday'])->format('M d, Y'),
             'age' => Carbon::parse($this->actor['birthday'])->age,
             'social_media_links' => $this->formatSocialMediaLinks($this->actor['external_ids']),
-            'known_for' => $this->formatKnownFor($this->actor['combined_credits']['cast'])
+            'known_for' => $this->formatKnownFor($this->actor['combined_credits']['cast']),
+            'credits' => $this->formatCredits($this->actor['combined_credits']['cast'])
         ])->dump();
     }
 
@@ -34,7 +35,7 @@ class ActorViewModel extends ViewModel
         ])->only('facebook', 'instagram', 'twitter');
     }
 
-    public function formatKnownFor($credits)
+    private function formatKnownFor($credits)
     {
         return collect($credits)->where('media_type', 'movie')->sortByDesc('popularity')->take(5)
             ->map(function ($movie) {
@@ -43,5 +44,42 @@ class ActorViewModel extends ViewModel
                     'title' => $movie['title'] ? $movie['title'] : 'Untitled'
                 ])->only('title', 'poster_path', 'id');
             });
+    }
+
+    private function formatCredits($credits)
+    {
+        return collect($credits)->map(function ($credit) {
+                $title = $this->extractCreditTitle($credit);
+                $releaseDate = $this->extractCreditReleaseDate($credit);
+
+                return collect($credit)->merge([
+                    'title'=> $title,
+                    'release_date' => $releaseDate,
+                    'release_year' => isset($releaseDate) ? Carbon::parse($releaseDate)->format('Y') : 'Future',
+                    'character' => isset($credit['character']) ? $credit['character'] : ''
+                ])->only('title', 'release_year', 'character');
+            })->sortByDesc('release_date');
+    }
+
+    private function extractCreditTitle($credit){
+        $title = '';
+        if(isset($credit['title'])){
+            return $credit['title'];
+        }
+        else if($credit['name']){
+            return $credit['name'];
+        }
+        return $title;
+    }
+
+    private function extractCreditReleaseDate($credit){
+        $releaseDate = '';
+        if(isset($credit['release_date'])){
+            return $releaseDate = $credit['release_date'];
+        }
+        else if(isset($credit['first_air_date'])){
+            return $releaseDate = $credit['first_air_date'];
+        }
+        return $releaseDate;
     }
 }
