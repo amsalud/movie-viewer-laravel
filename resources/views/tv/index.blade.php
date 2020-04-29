@@ -10,5 +10,14 @@
             @endforeach
         </div>
     </div>
+    <div class="top-rated-tvshows py-24">
+        <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">Top Rated TV Shows</h2>
+        <div class="grid grid-cols-1 sm:grid-cols2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            @foreach($topRatedTvShows as $tvShow)
+            <x-tv-item :tvShow="$tvShow" />
+            @endforeach
+        </div>
+    </div>
+
 </div>
 @endsection
