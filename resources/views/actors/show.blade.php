@@ -54,7 +54,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
                 @foreach($actor['known_for'] as $movie)
                 <div class="mt-4">
-                    <a href="#">
+                    <a href="{{route('movies.show', $movie['id'])}}">
                         <img src="{{$movie['poster_path']}}" alt="" class="hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <a href="{{route('movies.show', $movie['id'])}}" target="_blank" class="text-sm leading-normal block text-gray-400 hover:text-white mt-1">{{$movie['title']}}</a>
