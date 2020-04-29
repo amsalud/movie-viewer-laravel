@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ViewModels\TvShowsViewModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class TvController extends Controller
 {
@@ -10,10 +12,14 @@ class TvController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function index()
     {
-        //
+        $popularTvShows = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/tv/popular')->json()['results'];
+        $genres = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/genre/movie/list')->json()['genres'];
+        $viewModel = new TvShowsViewModel($popularTvShows, $genres);
+        
+        return view('tv.index', $viewModel);
     }
 
     /**
