@@ -38,12 +38,13 @@ class ActorViewModel extends ViewModel
     private function formatKnownFor($credits)
     {
         return collect($credits)->sortByDesc('popularity')->take(5)
-            ->map(function ($movie) {
-                $title = $this->extractTitle($movie);
-                return collect($movie)->merge([
-                    'poster_path' => $movie['poster_path'] ? 'https://image.tmdb.org/t/p/w185' . $movie['poster_path'] : 'https://via.placeholder.com/185x278',
-                    'title' => $title
-                ])->only('title', 'poster_path', 'id');
+            ->map(function ($credit) {
+                $title = $this->extractTitle($credit);
+                return collect($credit)->merge([
+                    'poster_path' => $credit['poster_path'] ? 'https://image.tmdb.org/t/p/w185' . $credit['poster_path'] : 'https://via.placeholder.com/185x278',
+                    'title' => $title,
+                    'route_name' => $this->getRouteName($credit)
+                ])->only('title', 'poster_path', 'id', 'route_name');
             });
     }
 
@@ -82,5 +83,14 @@ class ActorViewModel extends ViewModel
             return $releaseDate = $credit['first_air_date'];
         }
         return $releaseDate;
+    }
+
+    private function getRouteName($credit){
+        if($credit['media_type'] == 'movie'){
+            return 'movies.show';
+        }
+        else if($credit['media_type'] == 'tv'){
+            return 'tv.show';
+        }
     }
 }
