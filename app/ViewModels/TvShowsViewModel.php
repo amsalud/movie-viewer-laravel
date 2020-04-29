@@ -8,16 +8,22 @@ use Spatie\ViewModels\ViewModel;
 class TvShowsViewModel extends ViewModel
 {
     public $popularTvShows;
+    public $topRatedTvShows;
     public $genres;
 
-    public function __construct($popularTvShows, $genres)
+    public function __construct($popularTvShows, $topRatedTvShows, $genres)
     {
         $this->popularTvShows = $popularTvShows;
+        $this->topRatedTvShows = $topRatedTvShows;
         $this->genres = $genres;
     }
 
     public function popularTvShows(){
         return $this->formatTvShowsData($this->popularTvShows);
+    }
+
+    public function topRatedTvShows(){
+        return $this->formatTvShowsData($this->topRatedTvShows);
     }
     private function formatTvShowsData($tvShows){
         return collect($tvShows)->map(function($tvShow){
