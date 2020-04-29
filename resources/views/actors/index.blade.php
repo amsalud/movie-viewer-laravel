@@ -20,8 +20,12 @@
         </div>
     </div>
     <div class="flex justify-between mt-16">
-        <a href="#">Previous</a>
-        <a href="">Next</a>
+        @if($previous)
+        <a href="/actors/page/{{$previous}}">Previous</a>
+        @endif
+        @if($next)
+        <a href="/actors/page/{{$next}}">Next</a>
+        @endif
     </div>
 </div>
 @endsection

@@ -27,4 +27,12 @@ class ActorsViewModel extends ViewModel
             ])->only(['profile_path', 'name', 'id', 'known_for']);
         });
     }
+
+    public function previous(){
+        return $this->page > 1 ? $this->page - 1 : null;
+    }
+
+    public function next(){
+        return $this->page < 500 ? $this->page + 1 : null;
+    }
 }
