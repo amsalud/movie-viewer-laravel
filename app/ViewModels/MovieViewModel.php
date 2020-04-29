@@ -38,7 +38,7 @@ class MovieViewModel extends ViewModel
         return collect($this->movie['credits']['cast'])->map(function($cast){
             return collect($cast)->merge([
                 'image' => isset($cast['profile_path']) ? 'https://image.tmdb.org/t/p/w300' . $cast['profile_path'] : 'https://api.adorable.io/avatars/285/abott@adorable.png'
-            ])->only(['name', 'character', 'image']);
+            ])->only(['name', 'character', 'image', 'id']);
         })->take(5);
     }
 
