@@ -7,10 +7,12 @@ use Spatie\ViewModels\ViewModel;
 class ActorsViewModel extends ViewModel
 {
     public $popularActors;
+    public $page;
 
-    public function __construct($popularActors)
+    public function __construct($popularActors, $page)
     {
         $this->popularActors = $popularActors;
+        $this->page = $page;
     }
 
     public function popularActors(){
