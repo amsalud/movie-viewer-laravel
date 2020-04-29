@@ -23,13 +23,13 @@
                 {{$tvShow['overview']}}
             </p>
 
-            @if(count($tvShow['crews']) > 0) 
+            @if(count($tvShow['creators']) > 0) 
             <div class="mt-12">
                 <div class="flex mt-4">
-                    @foreach($tvShow['crews'] as $crew)
+                    @foreach($tvShow['creators'] as $creator)
                     <div class="mr-8">
-                        <div>{{ $crew['name'] }}</div>
-                        <div class="text-sm text-gray-400">{{$crew['job']}}</div>
+                        <div>{{ $creator }}</div>
+                        <div class="text-sm text-gray-400">Creator</div>
                     </div>
                     @endforeach
                 </div>
