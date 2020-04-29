@@ -68,7 +68,9 @@
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-seminold">Credits</h2>
         <ul class="list-disc leading-loose pl-5 mt-8">
-            <li>2020 &middot; <strong>Black Widow</strong> as Tony Stark / Iron Man</li>
+            @foreach($actor['credits'] as $credit)
+            <li>{{$credit['release_year']}} &middot; <strong>{{$credit['title']}}</strong> as {{$credit['character']}}</li>
+            @endforeach
         </ul>
     </div>
 </div>
