@@ -1,4 +1,4 @@
-<div class="tvShow-images" x-data="{ isOpen: false, image: ''}">
+<div class="images" x-data="{ isOpen: false, image: ''}">
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-semibold">Images</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -14,7 +14,7 @@
             @endforeach
         </div>
         <x-modal>
-            <img :src="image" alt="poster">
+            <img :src="image" alt="poster" />
         </x-modal>
     </div>
 </div>
