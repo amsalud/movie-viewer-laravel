@@ -22,7 +22,7 @@ class ActorViewModel extends ViewModel
             'age' => Carbon::parse($this->actor['birthday'])->age,
             'social_media_links' => $this->formatSocialMediaLinks($this->actor['external_ids']),
             'known_for' => $this->formatKnownFor($this->actor['combined_credits']['cast']),
-            'credits' => $this->formatCredits($this->actor['combined_credits']['cast'])
+            'credits' => $this->formatCredits($this->actor['combined_credits']['cast']),
         ])->only('profile_path', 'birthday', 'age', 'biography', 'social_media_links', 'known_for', 'credits', 'homepage', 'name', 'place_of_birth');
     }
 
@@ -56,7 +56,7 @@ class ActorViewModel extends ViewModel
 
                 return collect($credit)->merge([
                     'title'=> $title,
-                    'release_year' => isset($releaseDate) && $releaseDate !== null ? Carbon::parse($releaseDate)->format('Y') : 'Future',
+                    'release_year' => isset($releaseDate) && !empty($releaseDate) ? Carbon::parse($releaseDate)->format('Y') : 'Future',
                     'character' => isset($credit['character']) ? $credit['character'] : '',
                     'release_date' => $releaseDate
                 ])->only('title', 'release_year', 'character', 'release_date', 'media_type');
@@ -76,10 +76,10 @@ class ActorViewModel extends ViewModel
 
     private function extractReleaseDate($credit){
         $releaseDate = '';
-        if($credit['media_type'] === 'movie'){
+        if(isset($credit['release_date'])){
             return $credit['release_date'];
         }
-        else if($credit['media_type'] === 'tv'){
+        else if(isset($credit['first_air_date'])){
             return $credit['first_air_date'];
         }
         return $releaseDate;
