@@ -20,7 +20,7 @@ class TvShowViewModel extends ViewModel
             'poster_path' => 'https://image.tmdb.org/t/p/w500' . $this->tvShow['poster_path'],
             'vote_average' => $this->tvShow['vote_average'] * 10 . '%',  
             'first_air_date' => Carbon::parse($this->tvShow['first_air_date'])->format('M d, Y'),
-            'trailer' => count($this->tvShow['videos']['results']) > 0 ? 'https://www.youtube.com/embed/' . ($this->tvShow['videos']['results'][0]['id']) : null,
+            'trailer' => count($this->tvShow['videos']['results']) > 0 ? 'https://www.youtube.com/embed/' . ($this->tvShow['videos']['results'][0]['key']) : null,
             'genres' => collect($this->tvShow['genres'])->pluck('name')->flatten()->implode(', '),
             'crews' => $this->formatCrews(),
             'casts' => $this->formatCasts(),
