@@ -26,8 +26,8 @@ class SearchDropdown extends Component
                 'title' => $this->getTitle($searchResult),
                 'route_name' => $this->getRouteName($searchResult),
                 'image' => $this->getImageLink($searchResult),
-            ]);
-        })->take(10)->dump();
+            ])->only('id', 'title', 'image', 'route_name');
+        })->take(10);
     }
 
     private function getTitle($searchResult){
