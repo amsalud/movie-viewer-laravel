@@ -100,11 +100,9 @@
             </div>
             @endforeach
         </div>
-
         <x-modal>
             <img :src="image" alt="poster">
         </x-modal>
-       
     </div>
 </div>
 @endif
