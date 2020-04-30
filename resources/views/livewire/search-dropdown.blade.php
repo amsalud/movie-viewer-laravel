@@ -11,14 +11,10 @@
         <ul>
             @foreach($searchResults as $searchResult)
             <li class="border-b text-sm border-gray-700">
-                <a href="{{route('movies.show', $searchResult['id'])}}" class="block hover:bg-gray-700 px-3 py-3 flex items-center"
+                <a href="{{route($searchResult['route_name'], $searchResult['id'])}}" class="block hover:bg-gray-700 px-3 py-3 flex items-center"
                 @if($loop->last) @keydown.tab.exact="isOpen = false"  @endif
                 >
-                    @if(isset($searchResult['poster_path']))
-                    <img src="{{'https://image.tmdb.org/t/p/w92' . $searchResult['poster_path'] }}" alt="{{$searchResult['title']}}" class="w-8">
-                    @else
-                    <img src="https://via.placeholder.com/50x75" alt="{{$searchResult['title']}}">
-                    @endif
+                    <img src="{{ $searchResult['image'] }}" alt="{{$searchResult['title']}}" class="w-8">
                     <span class="ml-4">{{$searchResult['title']}}</span> 
                 </a>
             </li>
