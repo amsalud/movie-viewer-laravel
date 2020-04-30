@@ -23,10 +23,20 @@ class SearchDropdown extends Component
     private function formatSearchResults($searchResults){
         return collect($searchResults)->map(function($searchResult){
             return collect($searchResult)->merge([
+                'title' => $this->getTitle($searchResult),
                 'route_name' => $this->getRouteName($searchResult),
                 'image' => $this->getImageLink($searchResult),
             ]);
         })->take(10)->dump();
+    }
+
+    private function getTitle($searchResult){
+        if($searchResult['media_type'] === 'movie'){
+            return isset($searchResult['title']) ? $searchResult['title'] : 'Untitled';
+        }
+        else if($searchResult['media_type'] === 'tv' || $searchResult['media_type'] === 'person'){
+            return isset($searchResult['name']) ? $searchResult['name'] : 'Untitled';
+        }
     }
 
     private function getRouteName($searchResult){
