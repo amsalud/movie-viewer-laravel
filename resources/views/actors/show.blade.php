@@ -74,4 +74,7 @@
         </ul>
     </div>
 </div>
+@if(count($actor['images']) > 0)
+    <x-image-gallery :images="$actor['images']" />
+@endif
 @endsection

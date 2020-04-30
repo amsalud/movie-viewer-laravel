@@ -23,7 +23,8 @@ class ActorViewModel extends ViewModel
             'social_media_links' => $this->formatSocialMediaLinks($this->actor['external_ids']),
             'known_for' => $this->formatKnownFor($this->actor['combined_credits']['cast']),
             'credits' => $this->formatCredits($this->actor['combined_credits']['cast']),
-        ])->only('profile_path', 'birthday', 'age', 'biography', 'social_media_links', 'known_for', 'credits', 'homepage', 'name', 'place_of_birth');
+            'images' => $this->formatImages()
+        ])->only('profile_path', 'birthday', 'age', 'biography', 'social_media_links', 'known_for', 'credits', 'homepage', 'name', 'place_of_birth', 'images')->dump();
     }
 
     private function formatSocialMediaLinks($links)
@@ -92,5 +93,11 @@ class ActorViewModel extends ViewModel
         else if($credit['media_type'] == 'tv'){
             return 'tv.show';
         }
+    }
+
+    private function formatImages(){
+        return collect($this->actor['images']['profiles'])->map(function($image){
+            return 'https://image.tmdb.org/t/p/w300' . $image['file_path'];
+        })->take(9); 
     }
 }
