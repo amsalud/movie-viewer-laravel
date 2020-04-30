@@ -56,9 +56,10 @@ class ActorViewModel extends ViewModel
 
                 return collect($credit)->merge([
                     'title'=> $title,
-                    'release_year' => isset($releaseDate) ? Carbon::parse($releaseDate)->format('Y') : 'Future',
-                    'character' => isset($credit['character']) ? $credit['character'] : ''
-                ])->only('title', 'release_year', 'character', 'release_date');
+                    'release_year' => isset($releaseDate) && $releaseDate !== null ? Carbon::parse($releaseDate)->format('Y') : 'Future',
+                    'character' => isset($credit['character']) ? $credit['character'] : '',
+                    'release_date' => $releaseDate
+                ])->only('title', 'release_year', 'character', 'release_date', 'media_type');
             })->sortByDesc('release_date');
     }
 
@@ -75,11 +76,11 @@ class ActorViewModel extends ViewModel
 
     private function extractReleaseDate($credit){
         $releaseDate = '';
-        if(isset($credit['release_date'])){
-            return $releaseDate = $credit['release_date'];
+        if($credit['media_type'] === 'movie'){
+            return $credit['release_date'];
         }
-        else if(isset($credit['first_air_date'])){
-            return $releaseDate = $credit['first_air_date'];
+        else if($credit['media_type'] === 'tv'){
+            return $credit['first_air_date'];
         }
         return $releaseDate;
     }
