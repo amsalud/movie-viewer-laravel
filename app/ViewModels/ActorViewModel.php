@@ -56,11 +56,10 @@ class ActorViewModel extends ViewModel
 
                 return collect($credit)->merge([
                     'title'=> $title,
-                    'release_date' => $releaseDate,
                     'release_year' => isset($releaseDate) ? Carbon::parse($releaseDate)->format('Y') : 'Future',
                     'character' => isset($credit['character']) ? $credit['character'] : ''
-                ])->only('title', 'release_year', 'character');
-            })->sortByDesc('release_date');
+                ])->only('title', 'release_year', 'character', 'release_date');
+            })->sortByDesc('release_date')->dump();
     }
 
     private function extractTitle($credit){
