@@ -7,8 +7,8 @@
             <span class="ml-2">Play Trailer</span>
         </button>
     </div>
-    <x-modal>
-        <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
+    <x-modal :fullWidth="true">
+        <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%;">
             <iframe class="responsive-iframe absolute top-0 left-0 w-full h-full" src="{{ $trailer }}" style="border:0;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </x-modal>
