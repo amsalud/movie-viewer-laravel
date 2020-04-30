@@ -6,13 +6,15 @@ use Illuminate\View\Component;
 
 class Modal extends Component
 {
+    public $fullWidth;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($fullWidth=false)
     {
+        $this->fullWidth = $fullWidth;
     }
 
     /**
