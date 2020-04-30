@@ -23,7 +23,8 @@ class SearchDropdown extends Component
     private function formatSearchResults($searchResults){
         return collect($searchResults)->map(function($searchResult){
             return collect($searchResult)->merge([
-                'route_name' => $this->getRouteName($searchResult)
+                'route_name' => $this->getRouteName($searchResult),
+                'image' => $this->getImageLink($searchResult),
             ]);
         })->take(10)->dump();
     }
@@ -37,6 +38,15 @@ class SearchDropdown extends Component
         }
         else if($searchResult['media_type'] === 'person'){
             return 'actors.show';
+        }
+    }
+
+    private function getImageLink($searchResult){
+        if($searchResult['media_type'] === 'movie' || $searchResult['media_type'] === 'tv'){
+            return isset($searchResult['poster_path']) ? 'https://image.tmdb.org/t/p/w92' . $searchResult['poster_path'] : 'https://via.placeholder.com/50x75';
+        }
+        else if($searchResult['media_type'] === 'person'){
+            return isset($searchResult['profile_path']) ? 'https://image.tmdb.org/t/p/w92' . $searchResult['profile_path'] : 'https://via.placeholder.com/50x75';
         }
     }
 }
