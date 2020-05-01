@@ -6,6 +6,7 @@ use App\ViewModels\ActorsViewModel;
 use App\ViewModels\ActorViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ActorsController extends Controller
 {
@@ -55,8 +56,14 @@ class ActorsController extends Controller
     {
         $actor = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/person/'.$id . '?append_to_response=external_ids,combined_credits,images')->json();
         
-        $viewModel = new ActorViewModel($actor);
-        return view('actors.show', $viewModel);
+        if(isset($actor['status_code'], $actor['status_message']) ){
+            Alert::toast($actor['status_message'], 'error');
+            return redirect('/');
+        }
+        else{
+            $viewModel = new ActorViewModel($actor);
+            return view('actors.show', $viewModel);
+        }
     }
 
     /**
