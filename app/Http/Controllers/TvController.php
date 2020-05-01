@@ -6,6 +6,7 @@ use App\ViewModels\TvShowsViewModel;
 use App\ViewModels\TvShowViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TvController extends Controller
 {
@@ -54,9 +55,14 @@ class TvController extends Controller
     {
         $tvShow = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/tv/'. $id . '?append_to_response=images,videos,credits')->json();
 
-        $viewModel = new TvShowViewModel($tvShow);
-
-        return view('tv.show', $viewModel);
+        if(isset($tvShow['status_code'], $tvShow['status_message']) ){
+            Alert::toast($tvShow['status_message'], 'error');
+            return redirect('/');
+        }
+        else{
+            $viewModel = new TvShowViewModel($tvShow);
+            return view('tv.show', $viewModel);
+        }
     }
 
     /**
