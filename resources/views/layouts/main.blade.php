@@ -27,16 +27,17 @@
             </ul>
             <div class="flex flex-col md:flex-row items-center">
                 <livewire:search-dropdown />
-                <div class="mt-3 md:ml-4 md:mt-0">
+                <!-- <div class="mt-3 md:ml-4 md:mt-0">
                     <a href="#">
                         <img src="/img/avatar.jpg" alt="avatar" class="rounded-full w-8 h-8">
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>
     @yield('content')
     <livewire:scripts>
     @yield('scripts')
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 </html>
