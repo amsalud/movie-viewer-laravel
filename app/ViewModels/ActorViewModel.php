@@ -24,7 +24,7 @@ class ActorViewModel extends ViewModel
             'known_for' => $this->formatKnownFor($this->actor['combined_credits']['cast']),
             'credits' => $this->formatCredits($this->actor['combined_credits']['cast']),
             'images' => $this->formatImages()
-        ])->only('profile_path', 'birthday', 'age', 'biography', 'social_media_links', 'known_for', 'credits', 'homepage', 'name', 'place_of_birth', 'images')->dump();
+        ])->only('profile_path', 'birthday', 'age', 'biography', 'social_media_links', 'known_for', 'credits', 'homepage', 'name', 'place_of_birth', 'images');
     }
 
     private function formatSocialMediaLinks($links)
