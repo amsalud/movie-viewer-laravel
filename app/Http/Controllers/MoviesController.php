@@ -6,6 +6,7 @@ use App\ViewModels\MoviesViewModel;
 use App\ViewModels\MovieViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MoviesController extends Controller
 {
@@ -55,10 +56,15 @@ class MoviesController extends Controller
     public function show($id)
     {
         $movie = Http::withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $id . '?append_to_response=credits,videos,images')->json();
-        
-        $viewModel = new MovieViewModel($movie);
-        
-        return view('movies.show', $viewModel);
+
+        if(isset($movie['status_code'], $movie['status_message']) ){
+            Alert::toast($movie['status_message'], 'error');
+            return redirect('/');
+        }
+        else{
+            $viewModel = new MovieViewModel($movie);
+            return view('movies.show', $viewModel);
+        }
     }
 
     /**
