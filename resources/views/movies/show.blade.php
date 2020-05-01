@@ -32,7 +32,7 @@
                     @endforeach
                 </div>
             </div>
-            @if(isset($movie['trailer']))
+            @if(isset($movie['trailer']) && !empty($movie['trailer']))
                 <x-trailer-link :trailer="$movie['trailer']"></x-trailer-link>
             @endif
         </div>

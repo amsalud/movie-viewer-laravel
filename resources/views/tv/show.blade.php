@@ -35,7 +35,7 @@
                 </div>
             </div>
             @endif
-            @if(isset($tvShow['trailer']))
+            @if(isset($tvShow['trailer']) && !empty($tvShow['trailer']))
                 <x-trailer-link :trailer="$tvShow['trailer']"></x-trailer-link>
             @endif
         </div>
